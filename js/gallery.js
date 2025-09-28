@@ -48,23 +48,23 @@ const images = [
 
 const gallery = document.querySelector('.gallery');
 
-images.map(img => {
-  const { preview, original, description } = img;
-  gallery.insertAdjacentHTML(
-    'beforeend',
-    `
-    <li class="gallery-item">
-    <a class="gallery-link" href="${original}">
-    <img
-      class="gallery-image"
-      src="${preview}"
-      data-source="${original}"
-      alt="${description}"
-    />
-  </a>
-</li>`
-  );
-});
+const galleryImages = images
+  .map(
+    ({ preview, original, description }) =>
+      `<li class="gallery-item">
+          <a class="gallery-link" href="${original}">
+            <img
+              class="gallery-image"
+              src="${preview}"
+              data-source="${original}"
+              alt="${description}"
+            />
+          </a>
+        </li>`
+  )
+  .join('');
+
+gallery.insertAdjacentHTML('beforeend', galleryImages);
 
 gallery.addEventListener('click', e => {
   e.preventDefault();
